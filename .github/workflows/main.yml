@@ -1,8 +1,14 @@
-name: Validate Repository Name
+name: Enforce Valid Repository Name
 
 on:
-  repository:
-    types: [created]
+  create:
+    branches:
+      - "*"
+    tags:
+      - "*"
+  push:
+    branches:
+      - "*"
 
 jobs:
   validate-name:
