@@ -16,13 +16,13 @@ jobs:
           REPO_NAME: ${{ github.event.repository.name }}
         run: |
           # Define valid suffixes
-          VALID_SUFFIXES=("backend" "middleware" "frontend" "mobileapp")
+          VALID_SUFFIXES=("backend" "middleware" "frontend" "mobileapp" "org")
 
           # Define valid project names
-          VALID_PROJECTS=("middey" "nellalinksbs" "nellalinktest" "rimplenet")
+          VALID_PROJECTS=("middey" "nellalinksbs" "nellalinktest" "rimplenet" "workflow")
 
           # Define valid modules
-          VALID_MODULES=("user-app" "admin-app" "kyc-verification" "validate-transaction")
+          VALID_MODULES=("user-app" "admin-app" "kyc-verification" "validate-transaction" "sop")
 
           # Extract parts of the repository name
           SUFFIX=$(echo "$REPO_NAME" | cut -d- -f1)
