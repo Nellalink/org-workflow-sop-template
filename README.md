@@ -149,16 +149,16 @@ jobs:
           fi
 
           echo "Repository name '$REPO_NAME' is valid."
-       - name: Send Slack Notification on Invalid Repository Name
-        if: failure()  # Send Slack notification only if the validation fails
-        uses: slackapi/slack-github-action@v1.21.0
-        with:
-          payload: |
-            {
-              "text": "The repository name '$REPO_NAME' does not follow the valid naming convention. Please update the repository name to follow the required pattern: [SUFFIX]-[PROJECT]-[MODULE]."
-            }
-        env:
-          SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
+          - name: Send Slack Notification on Invalid Repository Name
+            if: failure()  # Send Slack notification only if the validation fails
+            uses: slackapi/slack-github-action@v1.21.0
+            with:
+              payload: |
+                {
+                  "text": "The repository name '$REPO_NAME' does not follow the valid naming convention. Please update the repository name to follow the required pattern: [SUFFIX]-[PROJECT]-[MODULE]."
+                }
+            env:
+              SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
 ```
 
 ---

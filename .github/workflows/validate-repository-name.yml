@@ -1,13 +1,10 @@
 name: Enforce Valid Repository Name
 
 on:
-  create:
+  push:
     branches:
       - "*"
     tags:
-      - "*"
-  push:
-    branches:
       - "*"
 
 jobs:
@@ -19,11 +16,11 @@ jobs:
           REPO_NAME: ${{ github.event.repository.name }}
         run: |
           # Define valid suffixes
-          VALID_SUFFIXES=("backend" "middleware" "frontend")
-          
+          VALID_SUFFIXES=("backend" "middleware" "frontend" "mobileapp")
+
           # Define valid project names
-          VALID_PROJECTS=("middey" "rimplenet" "nellalinksbs" "nellalinktest")
-          
+          VALID_PROJECTS=("middey" "nellalinksbs" "nellalinktest" "rimplenet")
+
           # Define valid modules
           VALID_MODULES=("user-app" "admin-app" "kyc-verification" "validate-transaction")
 
@@ -51,5 +48,13 @@ jobs:
           fi
 
           echo "Repository name '$REPO_NAME' is valid."
-
-     
+          - name: Send Slack Notification on Invalid Repository Name
+            if: failure()  # Send Slack notification only if the validation fails
+            uses: slackapi/slack-github-action@v1.21.0
+            with:
+              payload: |
+                {
+                  "text": "The repository name '$REPO_NAME' does not follow the valid naming convention. Please update the repository name to follow the required pattern: [SUFFIX]-[PROJECT]-[MODULE]."
+                }
+            env:
+              SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
