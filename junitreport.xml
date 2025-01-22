@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="ExampleTestSuite" tests="2" failures="1" errors="0" skipped="0">
+    <testcase classname="example.TestClass" name="testSuccess" time="0.001"/>
+    <testcase classname="example.TestClass" name="testFailure" time="0.002">
+      <failure message="expected:&lt;false&gt; but was:&lt;true&gt;" type="junit.framework.AssertionFailedError"/>
+    </testcase>
+  </testsuite>
+</testsuites>
