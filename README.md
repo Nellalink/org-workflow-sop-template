@@ -41,8 +41,7 @@ Each repository name must follow the pattern:
 - `mobileapp-middey-android`
 - `mobileapp-middey-ios`
 
----
-
+--
 
 ## Enforced Validation
 
