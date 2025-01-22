@@ -43,6 +43,7 @@ Each repository name must follow the pattern:
 
 ---
 
+
 ## Enforced Validation
 
 The naming convention is enforced using a GitHub Action workflow. The workflow validates the repository name whenever a repository is created or a push is made. If the name does not follow the required pattern:
