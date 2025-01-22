@@ -53,12 +53,8 @@ jobs:
         if: failure() 
         uses: sanjaykrishnanrs/slack-notify-junitxml-action@0.1.12-alpha
         with:
-          payload: |
-            {
-              "text": "The repository name '$REPO_NAME' does not follow the valid naming convention. Please update the repository name to follow the required pattern: [SUFFIX]-[PROJECT]-[MODULE]."
-            }
           title: API Tests
           slackbotid: A089R98DLSX
           slackbottoken: xoxb-8328549482453-8316932500135-DC1ZjQM2WH8gnDe43Ko7ZgXt
           slackchannel: 'all-jubbytech'
-          junitxml_filepath: junitreport.xml
+          # junitxml_filepath: junitreport.xml
