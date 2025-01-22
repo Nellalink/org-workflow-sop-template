@@ -3,9 +3,9 @@ name: Enforce Valid Repository Name
 on:
   push:
     branches:
-      - "*"
+      - "**"
     tags:
-      - "*"
+      - "**"
 
 jobs:
   validate-name:
@@ -53,9 +53,15 @@ jobs:
       - name: Send Slack Notification on Invalid Repository Name
         if: failure()  
         uses: slackapi/slack-github-action@v1.21.0
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }} # Store the bot token in GitHub Secrets
         with:
-          payload: |
-            {
-              "text": "The repository name '${{ github.event.repository.name }}' does not follow the valid naming convention. Please update the repository name to follow the required pattern: [SUFFIX]-[PROJECT]-[MODULE]."
-            }
-          botToken: xoxb-1263725471889-8311103485795-G0MRHc2BFTt3jNI44w0nrUbd
+          channel-id: 'C089R98DLSX' # Replace with your Slack channel ID
+          slack-message: |
+            :warning: *Invalid Repository Name Detected*
+            Repository: \`${{ github.event.repository.name }}\`
+            Error: The repository name does not follow the valid naming convention.
+            Required format: \`[SUFFIX]-[PROJECT]-[MODULE]\`
+            *Suffix*: ${VALID_SUFFIXES[@]}
+            *Projects*: ${VALID_PROJECTS[@]}
+            *Modules*: ${VALID_MODULES[@]}
