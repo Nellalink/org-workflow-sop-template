@@ -54,7 +54,7 @@ jobs:
         if: failure()  
         uses: slackapi/slack-github-action@v1.21.0
         env:
-          SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }} # Store the bot token in GitHub Secrets
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }} # Store the bot token in GitHub Secrets
         with:
           channel-id: 'C08AF6E52U8'
           slack-message: |
