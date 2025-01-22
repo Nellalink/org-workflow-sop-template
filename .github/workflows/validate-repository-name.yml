@@ -56,7 +56,7 @@ jobs:
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }} # Store the bot token in GitHub Secrets
         with:
-          channel-id: 'C089R98DLSX' # Replace with your Slack channel ID
+          # channel-id: 'C089R98DLSX' # Replace with your Slack channel ID
           slack-message: |
             :warning: *Invalid Repository Name Detected*
             Repository: \`${{ github.event.repository.name }}\`
