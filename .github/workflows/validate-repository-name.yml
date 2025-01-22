@@ -51,7 +51,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Send Slack Notification on Invalid Repository Name
         if: failure() 
-        uses: sanjaykrishnanrs/slack-notify-junitxml-action@0.1.12-alpha
+        uses: sanjaykrishnanrs/slack-notify-junitxml-action@0.1.0-beta
         with:
           title: API Tests
           slackbotid: A089R98DLSX
