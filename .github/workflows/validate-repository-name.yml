@@ -58,5 +58,4 @@ jobs:
             {
               "text": "The repository name '${{ github.event.repository.name }}' does not follow the valid naming convention. Please update the repository name to follow the required pattern: [SUFFIX]-[PROJECT]-[MODULE]."
             }
-        env:
-          SLACK_TOKEN: xoxb-1263725471889-8311103485795-G0MRHc2BFTt3jNI44w0nrUbd
+          botToken: xoxb-1263725471889-8311103485795-G0MRHc2BFTt3jNI44w0nrUbd
