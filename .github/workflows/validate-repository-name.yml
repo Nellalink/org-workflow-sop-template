@@ -56,5 +56,7 @@ jobs:
           title: API Tests
           slackbotid: A089R98DLSX
           slackbottoken: xoxb-8328549482453-8316932500135-DC1ZjQM2WH8gnDe43Ko7ZgXt
-          slackchannel: 'all-jubbytech'
+          slackchannel: '#all-jubbytech'
           junitxml_filepath: junitreport.xml
+
+          
