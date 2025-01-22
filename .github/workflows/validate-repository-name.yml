@@ -12,51 +12,53 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Validate Repository Name
-        shell: bash
         env:
           REPO_NAME: ${{ github.event.repository.name }}
         run: |
           # Define valid suffixes
-          VALID_SUFFIXES=("backend" "middleware" "frontend" "mobileapp" "org")
-          
+          VALID_SUFFIXES=("backend" "middleware" "frontend" "mobileapp")
+
           # Define valid project names
-          VALID_PROJECTS=("middey" "nellalinksbs" "nellalinktest" "rimplenet" "workflow")
-          
+          VALID_PROJECTS=("middey" "nellalinksbs" "nellalinktest" "rimplenet")
+
           # Define valid modules
-          VALID_MODULES=("user-app" "admin-app" "kyc-verification" "validate-transaction" "sop-template")
-          
+          VALID_MODULES=("user-app" "admin-app" "kyc-verification" "validate-transaction")
+
           # Extract parts of the repository name
           SUFFIX=$(echo "$REPO_NAME" | cut -d- -f1)
           PROJECT=$(echo "$REPO_NAME" | cut -d- -f2)
           MODULE=$(echo "$REPO_NAME" | cut -d- -f3-)
-          
+
           # Check if SUFFIX is valid
           if [[ ! " ${VALID_SUFFIXES[@]} " =~ " $SUFFIX " ]]; then
             echo "Error: Invalid suffix '$SUFFIX'. Must be one of: ${VALID_SUFFIXES[@]}."
             exit 1
           fi
-          
+
           # Check if PROJECT is valid
           if [[ ! " ${VALID_PROJECTS[@]} " =~ " $PROJECT " ]]; then
             echo "Error: Invalid project name '$PROJECT'. Must be one of: ${VALID_PROJECTS[@]}."
             exit 1
           fi
-          
+
           # Check if MODULE is valid
           if [[ ! " ${VALID_MODULES[@]} " =~ " $MODULE " ]]; then
             echo "Error: Invalid module name '$MODULE'. Must be one of: ${VALID_MODULES[@]}."
             exit 1
           fi
-          
-          echo "Repository name '$REPO_NAME' is valid."
 
+          echo "Repository name '$REPO_NAME' is valid."
+      - uses: actions/checkout@v2
       - name: Send Slack Notification on Invalid Repository Name
-        if: failure()  # Only run if the validation fails
-        uses: slackapi/slack-github-action@v1.21.0
+        if: failure() 
+        uses: sanjaykrishnanrs/slack-notify-junitxml-action@0.1.12-alpha
         with:
           payload: |
             {
-              "text": "The repository name '${{ github.event.repository.name }}' does not follow the valid naming convention. Please update the repository name to follow the required pattern: [SUFFIX]-[PROJECT]-[MODULE]."
+              "text": "The repository name '$REPO_NAME' does not follow the valid naming convention. Please update the repository name to follow the required pattern: [SUFFIX]-[PROJECT]-[MODULE]."
             }
-        env:
-          SLACK_TOKEN: "xoxb-1263725471889-8311103485795-G0MRHc2BFTt3jNI44w0nrUbd"
+          title: API Tests
+          slackbotid: A089R98DLSX
+          slackbottoken: xoxb-8328549482453-8316932500135-DC1ZjQM2WH8gnDe43Ko7ZgXt
+          slackchannel: 'all-jubbytech'
+          junitxml_filepath: junitreport.xml

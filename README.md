@@ -163,7 +163,7 @@ jobs:
 
 ---
 
-# Proposed Naming conventions/Patterns for:
+# Proposed Naming conventions/Patterns for - :
 
 1. **Files/Folders** 
 2. **Branching**
