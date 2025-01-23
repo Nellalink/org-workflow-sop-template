@@ -1,11 +1,21 @@
 name: Enforce Valid Repository Name
 
+# on:
+#   push:
+#     branches:
+#       - "**"
+#     tags:
+#       - "**"
+
 on:
-  push:
-    branches:
-      - "**"
-    tags:
-      - "**"
+  workflow_call:
+    inputs:
+      slack-token:
+        required: false
+        type: string
+      channel-id:
+        required: false
+        type: string
 
 jobs:
   validate-name:
