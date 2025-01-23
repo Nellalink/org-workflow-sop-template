@@ -1,21 +1,11 @@
 name: Enforce Valid Repository Name
 
-# on:
-#   push:
-#     branches:
-#       - "**"
-#     tags:
-#       - "**"
-
 on:
-  workflow_call:
-    inputs:
-      slack-token:
-        required: false
-        type: string
-      channel-id:
-        required: false
-        type: string
+  push:
+    branches:
+      - "**"
+    tags:
+      - "**"
 
 jobs:
   validate-name:
@@ -25,6 +15,7 @@ jobs:
         shell: bash
         env:
           REPO_NAME: ${{ github.event.repository.name }}
+          CHANNEL_ID : 'C08AF6E52U8'
         run: |
           # Define valid suffixes
           VALID_SUFFIXES=("backend" "middleware" "frontend" "mobileapp" "org")
@@ -33,7 +24,7 @@ jobs:
           VALID_PROJECTS=("middey" "nellalinksbs" "nellalinktest" "rimplenet" "workflow")
           
           # Define valid modules
-          VALID_MODULES=("user-app" "admin-app" "kyc-verification" "validate-transaction" "sop-template")
+          VALID_MODULES=("user-app" "admin-app" "kyc-verification" "validate-transaction" "sop-template" "cryptoengine")
           
           # Extract parts of the repository name
           SUFFIX=$(echo "$REPO_NAME" | cut -d- -f1)
@@ -66,9 +57,14 @@ jobs:
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
         with:
-          channel-id: 'C08AF6E52U8'
+          channel-id: '$CHANNEL_ID'
           slack-message: |
             :warning: *Invalid Repository Name Detected*
             Error: The repository name does not follow the valid naming convention.
             Repository: \`${{ github.event.repository.name }}\`
             Required format: \`[SUFFIX]-[PROJECT]-[MODULE]\`
+      - name: Debug Inputs
+        run: |
+          echo "SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}" # Length of the token should not be 0
+          echo "Channel ID: $CHANNEL_ID"
+          
