@@ -48,7 +48,7 @@ Each repository name must follow the pattern:
 The naming convention is enforced using a GitHub Action workflow. The workflow validates the repository name whenever a repository is created or a push is made. If the name does not follow the required pattern:
 
 1. The workflow will fail.
-2. A Slack notification will be sent to alert the relevant team.
+2. A Slack notification will be sent to alert the relevant team;
 
 ---
 
