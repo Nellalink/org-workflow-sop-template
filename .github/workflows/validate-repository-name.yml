@@ -57,7 +57,7 @@ jobs:
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
         with:
-          channel-id: 'C08AF6E52U8'
+          channel-id: 'C08AF6E52U8_'
           slack-message: |
             :warning: *Invalid Repository Name Detected*
             Error: The repository name does not follow the valid naming convention.
