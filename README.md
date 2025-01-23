@@ -103,12 +103,21 @@ The validation is implemented as part of the GitHub Action workflow:
 ```yaml
 name: Enforce Valid Repository Name
 
+# on:
+#   push:
+#     branches:
+#       - "**"
+#     tags:
+#       - "**"
 on:
-  push:
-    branches:
-      - "**"
-    tags:
-      - "**"
+  workflow_call:
+    inputs:
+      slack-token:
+        required: false
+        type: string
+      channel-id:
+        required: false
+        type: string
 
 jobs:
   validate-name:
@@ -127,7 +136,7 @@ jobs:
           VALID_PROJECTS=("middey" "nellalinksbs" "nellalinktest" "rimplenet" "workflow")
           
           # Define valid modules
-          VALID_MODULES=("user-app" "admin-app" "kyc-verification" "validate-transaction" "sop-template" "cryptoengine")
+          VALID_MODULES=("user-app" "admin-app" "kyc-verification" "validate-transaction" "sop-templates" "cryptoengine")
           
           # Extract parts of the repository name
           SUFFIX=$(echo "$REPO_NAME" | cut -d- -f1)
@@ -156,16 +165,12 @@ jobs:
 
       - name: Send Slack Notification on Invalid Repository Name
         if: failure()  
-        uses: slackapi/slack-github-action@v1.21.0
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+        uses: distributhor/workflow-webhook@v3
         with:
-          channel-id: 'C08AF6E52U8'
-          slack-message: |
-            :warning: *Invalid Repository Name Detected*
-            Error: The repository name does not follow the valid naming convention.
-            Repository: \`${{ github.event.repository.name }}\`
-            Required format: \`[SUFFIX]-[PROJECT]-[MODULE]\`
+          webhook_url: https://api.jubbytech.com/webhook/
+          webhook_secret: '4544af'
+          data: '{"title": "Invalid Repository Name Detected","text": "The repository name does not follow the valid naming convention.","repo": "${{ github.event.repository.name }}","format": "[SUFFIX]-[PROJECT]-[MODULE]"}'
+
 ```
 
 ---
