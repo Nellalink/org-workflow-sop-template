@@ -1,11 +1,5 @@
 name: Enforce Valid Repository Name
 
-# on:
-#   push:
-#     branches:
-#       - "**"
-#     tags:
-#       - "**"
 on:
   workflow_call:
     inputs:
