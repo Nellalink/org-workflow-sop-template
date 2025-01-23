@@ -66,12 +66,7 @@ jobs:
         with:
           webhook_url: https://webhook.site/446f0131-88b7-425c-94c0-20dfdc4eef7b
           webhook_secret: '4544af'
-          data: '{
-            title: "Invalid Repository Name Detected",
-            text: "The repository name does not follow the valid naming convention.",
-            repo: "${{ github.event.repository.name }}",
-            formate: "[SUFFIX]-[PROJECT]-[MODULE]"
-            }'
+          data: '{ "weapon": "hammer", "drink" : "beer" }'
           # channel-id: 'C08AF6E52U8'
           # slack-message: |
           #   :warning: *Invalid Repository Name Detected*
