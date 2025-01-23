@@ -6,6 +6,7 @@ This policy outlines the repository naming conventions for all projects under ou
 
 ---
 
+
 ## Naming Convention
 
 Each repository name must follow the pattern:
