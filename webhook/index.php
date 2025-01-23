@@ -4,8 +4,6 @@ include "./util.php";
 
 class WebHooks extends Util
 {
-    public $https  = null;
-
     function __construct()
     {
         parent::__construct();

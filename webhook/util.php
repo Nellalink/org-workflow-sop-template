@@ -10,7 +10,7 @@ class Util
 
   public function __construct()
   {
-    $environment = 'dev';
+    $environment = 'prod';
     $dotenv = Dotenv::createImmutable(__DIR__, ".env.$environment");
     $dotenv->load();
     $this->SlackBotToken = $_ENV['SLACK_BOT_TOKEN'];
