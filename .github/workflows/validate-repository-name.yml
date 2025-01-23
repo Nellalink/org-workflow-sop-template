@@ -10,8 +10,6 @@ on:
 jobs:
   validate-name:
     runs-on: ubuntu-latest
-    env:  
-      CHANNEL_ID : 'C08AF6E52U8'
     steps:
       - name: Validate Repository Name
         shell: bash
@@ -59,14 +57,9 @@ jobs:
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
         with:
-          channel-id: $CHANNEL_ID
+          channel-id: 'C08AF6E52U8'
           slack-message: |
             :warning: *Invalid Repository Name Detected*
             Error: The repository name does not follow the valid naming convention.
             Repository: \`${{ github.event.repository.name }}\`
             Required format: \`[SUFFIX]-[PROJECT]-[MODULE]\`
-      - name: Debug Inputs
-        run: |
-          echo "SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}" # Length of the token should not be 0
-          echo "Channel ID: $CHANNEL_ID"
-          
