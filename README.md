@@ -16,6 +16,7 @@ Each repository name must follow the pattern:
 ```
 
 
+
 ### Definitions:
 
 - **SUFFIX**: Specifies the category or layer of the application. Must be one of the following:
