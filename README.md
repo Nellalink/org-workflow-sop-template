@@ -103,12 +103,6 @@ The validation is implemented as part of the GitHub Action workflow:
 ```yaml
 name: Enforce Valid Repository Name
 
-# on:
-#   push:
-#     branches:
-#       - "**"
-#     tags:
-#       - "**"
 on:
   workflow_call:
     inputs:
