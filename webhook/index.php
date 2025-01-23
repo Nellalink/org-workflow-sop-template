@@ -25,12 +25,12 @@ class WebHooks extends Util
 
             $title = $data['data']['title'] ?? "Failed Test";
             $msg = $data['data']['text'] ?? "new incoming message";
-            $repo = explode('/',$data['repository'])[1] ?? "<missing repository>";
+            $repo = $data['repo'] ?? "<missing repository>";
             $format = $data['format'] ?? "`[SUFFIX]-[PROJECT]-[MODULE]`";
 
             $response = $this->curlPost("chat.postMessage", [
                 'channel' => $this->ChannelID,
-                'text' => ":warning: {$title} \n Error: {$msg} \n Repository: `{$repo}` \n Required format: {$format}"
+                'text' => ":x: *{$title}* \n Error: {$msg} \n Repository: `{$repo}` \n Required format: {$format}"
             ]);
 
             // die(json_encode($response));
