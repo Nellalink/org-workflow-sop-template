@@ -10,12 +10,14 @@ on:
 jobs:
   validate-name:
     runs-on: ubuntu-latest
+    env:  
+      CHANNEL_ID : 'C08AF6E52U8'
     steps:
       - name: Validate Repository Name
         shell: bash
         env:
           REPO_NAME: ${{ github.event.repository.name }}
-          CHANNEL_ID : 'C08AF6E52U8'
+         
         run: |
           # Define valid suffixes
           VALID_SUFFIXES=("backend" "middleware" "frontend" "mobileapp" "org")
