@@ -58,7 +58,7 @@ jobs:
         with:
           channel-id: 'C08AF6E52U8'
           slack-message: |
-            :error: *Invalid Repository Name Detected*
+            :warning: *Invalid Repository Name Detected*
             Error: The repository name does not follow the valid naming convention.
             Repository: \`${{ github.event.repository.name }}\`
             Required format: \`[SUFFIX]-[PROJECT]-[MODULE]\`
