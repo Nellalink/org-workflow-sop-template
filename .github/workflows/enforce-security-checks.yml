@@ -1,0 +1,40 @@
+name: "Enforce Security Checks"
+
+on:
+  push:
+    branches:
+      - master
+      - main
+
+jobs:
+  analyze:
+    name: Analyze Code
+    runs-on: ubuntu-latest
+
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v2
+        with:
+          languages: 'javascript,python' # Specify languages to analyze
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v2
+      #if failed then call webhook to send slack notification 
+      - name: Send Slack Notification on Invalid Repository Name
+        if: failure()  
+        uses: distributhor/workflow-webhook@v3
+        with:
+          webhook_url: ${{ secrets.BASE_URL }}/server-github-webhook-processor/enforce-repo-naming-notify.php
+          webhook_secret: '4544af'
+          data: '{"title": "Invalid Repository Name Detected","text": "The repository name does not follow the valid naming convention.","repo": "${{ github.event.repository.name }}","format": "[SUFFIX]-[PROJECT]-[MODULE]"}'
+
+
+        

@@ -11,7 +11,6 @@ class WebHooks extends Util
 
     public function AuthenticateCall()
     {
-        $HOOK_TOKEN = '4a2985c1cbabda189fcafa37ab517827';
         $payload = $this->PayLoad();
         if (isset($payload['data']['text'])) {
             $this->sendMessage($payload);
@@ -20,7 +19,6 @@ class WebHooks extends Util
     public function sendMessage($data)
     {
         try {
-
             $title = $data['data']['title'] ?? "Failed Test";
             $msg = $data['data']['text'] ?? "new incoming message";
             $repo = $data['repo'] ?? "<missing repository>";
