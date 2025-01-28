@@ -4,6 +4,7 @@ include "./util.php";
 
 class WebHooks extends Util
 {
+
     function __construct()
     {
         parent::__construct();
@@ -11,7 +12,6 @@ class WebHooks extends Util
 
     public function AuthenticateCall()
     {
-        $HOOK_TOKEN = '4a2985c1cbabda189fcafa37ab517827';
         $payload = $this->PayLoad();
         if (isset($payload['data']['text'])) {
             $this->sendMessage($payload);
@@ -23,8 +23,8 @@ class WebHooks extends Util
 
             $title = $data['data']['title'] ?? "Failed Test";
             $msg = $data['data']['text'] ?? "new incoming message";
-            $repo = $data['repo'] ?? "<missing repository>";
-            $format = $data['format'] ?? "`[SUFFIX]-[PROJECT]-[MODULE]`";
+            $repo = $data['data']['repo'] ?? "<missing repository>";
+            $format = $data['data']['format'] ?? "`[SUFFIX]-[PROJECT]-[MODULE]`";
 
             $response = $this->curlPost("chat.postMessage", [
                 'channel' => $this->ChannelID,

@@ -10,11 +10,9 @@ class Util
 
   public function __construct()
   {
-    $environment = 'prod';
-    $dotenv = Dotenv::createImmutable(__DIR__, ".env.$environment");
-    $dotenv->load();
-    $this->SlackBotToken = $_ENV['SLACK_BOT_TOKEN'];
-    $this->ChannelID = $_ENV['CHANNEL_ID'];
+    $secrets = $this->ReadConfig();
+    $this->SlackBotToken = $secrets['SlackBotToken'];
+    $this->ChannelID = $secrets['ChannelID'];
   }
 
 
@@ -23,6 +21,19 @@ class Util
     $rst = json_decode(file_get_contents("php://input"));
     $pl = array_merge((array)$rst, $_REQUEST);
     return json_decode(json_encode($pl), true);
+  }
+
+  public function ReadConfig()
+  {
+    try {
+      $read = file_get_contents(__DIR__ . '/config.json');
+      if ($read === false) {
+        die("Error reading config.json");
+      }
+      return json_decode($read, true);
+    } catch (\Throwable $th) {
+      die($th->getMessage());
+    }
   }
 
 
@@ -34,17 +45,13 @@ class Util
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($postData));
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, array_merge($headers,['Authorization: Bearer ' . $this->SlackBotToken,'Content-Type: application/json']));
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array_merge($headers, ['Authorization: Bearer ' . $this->SlackBotToken, 'Content-Type: application/json']));
     $response = curl_exec($ch);
     if (curl_errno($ch)) {
       echo 'Error:' . curl_error($ch);
     }
     curl_close($ch);
 
-    return [$response,$this->SlackBotToken];
+    return [$response, $this->SlackBotToken];
   }
-
-
-
-
 }

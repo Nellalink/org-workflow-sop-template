@@ -1,0 +1,21 @@
+name: Central Entry Point
+
+on:
+  workflow_call:
+    inputs:
+      slack-token:
+        required: false
+        type: string
+      channel-id:
+        required: false
+        type: string
+
+jobs:
+  enforce-repo-name:
+    uses: ./.github/workflows/enforce-repo-naming.yml
+
+  enforce-security-checks:
+    uses: ./.github/workflows/enforce-security-checks.yml
+
+  enforce-folder-file-naming:
+    uses: ./.github/workflows/enforce-folder-file-naming.yml
