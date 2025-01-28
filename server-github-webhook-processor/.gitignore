@@ -1,4 +1,1 @@
-.env.dev
-.env.prod
-/vendor/
 config.json
