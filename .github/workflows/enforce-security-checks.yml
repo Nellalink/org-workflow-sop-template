@@ -40,4 +40,4 @@ jobs:
           data: '{"title": "Security threat found","text": "Security Vulnerablities were found while analysing codebase","repo": "${{ github.event.repository.name }}","format": "", "webhook_secret":"${{ secrets.WEBHOOK_SECRET}}"}'
 
 
-        
+          
