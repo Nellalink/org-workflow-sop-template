@@ -1,18 +1,17 @@
 <?php
-require_once __DIR__ . '/vendor/autoload.php';
-
-use Dotenv\Dotenv;
 
 class Util
 {
   private $SlackBotToken;
   public $ChannelID;
+  public $WebHookSecret;
 
   public function __construct()
   {
     $secrets = $this->ReadConfig();
-    $this->SlackBotToken = $secrets['SlackBotToken'];
-    $this->ChannelID = $secrets['ChannelID'];
+    $this->SlackBotToken = $secrets['SlackToken'];
+    $this->ChannelID = $secrets['SlackChannelID'];
+    $this->WebHookSecret = $secrets['WebHookSecret'];
   }
 
 
@@ -27,10 +26,11 @@ class Util
   {
     try {
       $read = file_get_contents(__DIR__ . '/config.json');
-      if ($read === false) {
-        die("Error reading config.json");
-      }
-      return json_decode($read, true);
+      if ($read === false)die("Error reading config.json");
+      // $read = str_replace('"', "'", $read); // Fixing escape characters for json_decode function.
+      $data =  json_decode($read, true);
+      if( !isset($data['SlackToken'], $data['SlackChannelID'], $data['WebHookSecret']) ) die("Missing authentication keys in config file");
+      return $data;
     } catch (\Throwable $th) {
       die($th->getMessage());
     }
