@@ -13,14 +13,17 @@ class WebHooks extends Util
     public function AuthenticateCall()
     {
         $payload = $this->PayLoad();
-        if (isset($payload['data']['text'])) {
-            $this->sendMessage($payload);
+
+        if (isset($payload['data']['webhook_secret'])) {
+            $webhook_secret = $payload['data']['webhook_secret'];
+            if (!hash_equals($this->WebHookSecret, $webhook_secret)) die("Authentication Failed: Invalid Webhook Secret");
+            return $this->sendMessage($payload);
         }
+        die("Authentication Failed: Missing Webhook Secret");
     }
     public function sendMessage($data)
     {
         try {
-
             $title = $data['data']['title'] ?? "Failed Test";
             $msg = $data['data']['text'] ?? "new incoming message";
             $repo = $data['data']['repo'] ?? "<missing repository>";
