@@ -59,11 +59,4 @@ jobs:
         uses: distributhor/workflow-webhook@v3
         with:
           webhook_url: ${{secrets.WEBHOOK_BASE_URL}}/server-github-webhook-processor/enforce-repo-naming-notify.php
-          data: '{"title": "Invalid Repository Name Detected","text": "The repository name does not follow the valid naming convention.","repo": "${{ github.event.repository.name }}","format": "[SUFFIX]-[PROJECT]-[MODULE]", "webhook_secret":"${{ secrets.WEBHOOK_SECRET}}"}'
-
-          # — enforce-repo-naming-notify.php
-# — enforce-security-checks-notify.php
-# — ⁠enforce-folder-file-naming-notify.php
-# — ⁠update-documentation-notify.php
-# — ⁠deploy-to-servers-notify.php
-#  https://api.jubbytech.com
+          data: '{"title": "Invalid Repository Name Detected","text": "The repository name does not follow the valid naming convention.","repo": "${{ github.event.repository.name }}","format": "`[SUFFIX]-[PROJECT]-[MODULE]`", "webhook_secret":"${{ secrets.WEBHOOK_SECRET}}"}'
