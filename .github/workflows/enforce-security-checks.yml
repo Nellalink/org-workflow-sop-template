@@ -6,8 +6,8 @@ on:
       slack-token:
         required: false
         type: string
-      channel-id:
-        required: false
+      webhook-token:
+        required: true
         type: string
 
 jobs:
@@ -36,8 +36,8 @@ jobs:
         if: failure()  
         uses: distributhor/workflow-webhook@v3
         with:
-          webhook_url: ${{ secrets.WEBHOOK_BASE_URL }}/server-github-webhook-processor/enforce-repo-naming-notify.php
-          data: '{"title": "Security threat found","text": "Security Vulnerablities were found while analysing codebase","repo": "${{ github.event.repository.name }}","format": "", "webhook_secret":"${{ secrets.WEBHOOK_SECRET}}"}' 
+          webhook_url: https://api.jubbytech.com/server-github-webhook-processor/enforce-repo-naming-notify.php
+          data: '{"title": "Security threat found","text": "Security Vulnerablities were found while analysing codebase","repo": "${{ github.event.repository.name }}","format": "", "webhook_secret":"${{ inputs.webhook-token}}"}' 
 
 
           
