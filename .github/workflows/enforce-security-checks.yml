@@ -2,13 +2,9 @@ name: "Enforce Security Checks"
 
 on:
   workflow_call:
-    inputs:
-      slack-token:
-        required: false
-        type: string
+    secrets:
       webhook-token:
-        required: true
-        type: string
+        required: true  # ✅ This ensures the secret is expected
 
 jobs:
   analyze:
