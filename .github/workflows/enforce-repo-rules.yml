@@ -1,0 +1,19 @@
+name: Central Entry Point
+
+on:
+  push:
+    branches:
+      - "**"
+    tags:
+      - "**"
+
+jobs:
+  enforce-repo-name:
+    uses: Nellalink/org-workflow-sop-template/.github/workflows/enforce-repository-name.yml@main
+
+  enforce-security-checks:
+    uses: Nellalink/org-workflow-sop-template/.github/workflows/enforce-security-checks.yml@main
+    permissions: 
+      actions: read
+      contents: read
+      security-events: write

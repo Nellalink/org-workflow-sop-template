@@ -2,9 +2,6 @@ name: Enforce Valid Repository Name
 
 on:
   workflow_call:
-    secrets:
-      webhook-token:
-        required: true  # ✅ This ensures the secret is expected
 
 jobs:
   validate-name:
@@ -55,4 +52,4 @@ jobs:
         uses: distributhor/workflow-webhook@v3
         with:
           webhook_url: https://api.jubbytech.com/server-github-webhook-processor/enforce-repo-naming-notify.php
-          data: '{"title": "Invalid Repository Name Detected","text": "The repository name does not follow the valid naming convention.","repo": "${{ github.event.repository.name }}","format": "`[SUFFIX]-[PROJECT]-[MODULE]`", "webhook_secret":"${{ inputs.webhook-token}}"}'
+          data: '{"title": "Invalid Repository Name Detected","text": "The repository name does not follow the valid naming convention.","repo": "${{ github.event.repository.name }}","format": "`[SUFFIX]-[PROJECT]-[MODULE]`", "webhook_secret":""}'
