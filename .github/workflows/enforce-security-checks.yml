@@ -24,6 +24,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Set up PHP with Psalm
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1' # Or your desired PHP version
+          extensions: psalm
+
+      - name: Install Composer dependencies (if any)
+        run: composer install --no-dev --optimize-autoloader
+
+      - name: Run Psalm analysis
+        run: vendor/bin/psalm --no-cache --config=psalm.xml # Or your Psalm config file
+
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:
@@ -31,13 +43,10 @@ jobs:
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
-      #if failed then call webhook to send slack notification 
-      - name: Send Slack Notification on Invalid Repository Name
-        if: failure()  
+
+      - name: Send Slack Notification on Failure
+        if: failure()
         uses: distributhor/workflow-webhook@v3
         with:
           webhook_url: https://api.jubbytech.com/server-github-webhook-processor/enforce-repo-naming-notify.php
-          data: '{"title": "Security threat found","text": "Security Vulnerablities were found while analysing codebase","repo": "${{ github.event.repository.name }}","format": "", "webhook_secret":""}' 
-
-
-          
+          data: '{"title": "Security threat found","text": "Security Vulnerabilities were found while analyzing codebase (Psalm & CodeQL)","repo": "${{ github.event.repository.name }}","format": "", "webhook_secret":""}'
