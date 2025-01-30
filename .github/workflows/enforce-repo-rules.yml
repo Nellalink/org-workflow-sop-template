@@ -12,10 +12,10 @@ on:
 
 jobs:
   enforce-repo-name:
-    uses: ./.github/workflows/enforce-repository-name.yml@main
+    uses: ./.github/workflows/enforce-repository-name.yml
 
   enforce-security-checks:
-    uses: ./.github/workflows/enforce-security-checks.yml@main
+    uses: ./.github/workflows/enforce-security-checks.yml
     permissions: 
       actions: read
       contents: read
