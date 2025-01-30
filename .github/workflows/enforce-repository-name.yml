@@ -27,7 +27,7 @@ jobs:
           VALID_PROJECTS=("middey" "nellalinksbs" "nellalinktest" "rimplenet" "workflow")
           
           # Define valid modules
-          VALID_MODULES=("user-app" "admin-app" "kyc-verification" "validate-transaction" "sop-templates" "cryptoengine")
+          VALID_MODULES=("user-app" "admin-app" "kyc-verification" "validate-transaction" "sop-template" "cryptoengine")
           
           # Extract parts of the repository name
           SUFFIX=$(echo "$REPO_NAME" | cut -d- -f1)
