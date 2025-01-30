@@ -2,6 +2,13 @@ name: "Enforce Security Checks"
 
 on:
   workflow_call:
+    inputs:
+      slack-token:
+        required: false
+        type: string
+      channel-id:
+        required: false
+        type: string
 
 jobs:
   analyze:
