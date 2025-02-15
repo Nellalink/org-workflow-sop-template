@@ -8,8 +8,8 @@ This document outlines the process and timeline for code-level and production-le
 ### 1. **Code-Level Deployment (Branch Merging to Main)**
 
 **Objective:**  
-Developers can continually merge their individual branch to **develop** branch 
-Merging of code from **develop** branch to the **main** branch is teremed **DEPLOYMENT** to keep the main branch up to date and ready for production deployment.
+1. **Developers** can continually merge their individual branch to **develop** branch 
+2. Merging of code from **develop** branch to the **main** branch is teremed **DEPLOYMENT** to keep the main branch up to date and ready for production deployment.
 
 **Deployment Days:**
 
