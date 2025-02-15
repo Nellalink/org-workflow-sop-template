@@ -244,3 +244,74 @@ jobs:
     - Body: "Implemented login, registration, and logout functionality using OAuth."
 2. `fix: resolve null pointer exception in OrderService`
     - Body: "Added null checks to avoid crashes when order ID is invalid."
+    - 
+
+
+---
+
+### Standard Operating Procedure (SOP) for Deployment
+
+**Purpose:**  
+This document outlines the process and timeline for code-level and production-level deployments to ensure smooth and efficient releases with minimal disruptions.
+
+---
+
+### 1. **Code-Level Deployment (Branch Merging to Main)**
+
+**Objective:**  
+Merge code from feature branches to the main branch to keep the main branch up to date and ready for production deployment.
+
+**Deployment Days:**
+
+- **Monday (Recommended):**  
+  The ideal day to perform code merging. This ensures the week starts with the latest changes and allows time to resolve any issues before the end of the week.
+  
+- **Tuesday (If Monday’s Merge Fails):**  
+  If merging didn’t happen on Monday due to any unforeseen reason, Tuesday is the second-best option to complete the task. Any delays beyond Tuesday could impact the week’s work.
+
+- **Wednesday (Late Deployment):**  
+  Merging on Wednesday is considered late and should be avoided if possible. Delays can cause a backlog in tasks and result in fewer available days to address any arising issues.
+
+- **Thursday (Not Recommended, Except for Critical Reasons):**  
+  Avoid merging on Thursday unless there is a critical update that must be applied. Any issues arising from Thursday merges may not be addressed before the weekend, risking weekend downtime.
+
+- **Friday (No Deployment):**  
+  No code-level deployment should be done on Fridays. Developers typically leave earlier for the weekend, and any deployment issues could lead to prolonged downtimes. Reserve Fridays for planning or fixing minor bugs if needed.
+
+**Developer Standby:**  
+During the deployment process, **all developers** are expected to remain on standby until the process is successfully completed. Developers should be ready to troubleshoot and address any issues that arise during the deployment.
+
+---
+
+### 2. **Production Level Deployment**
+
+**Objective:**  
+Deploy code to live servers, ensuring the system is up and running smoothly for end users. This also involves handling critical bugs or urgent fixes that need to be deployed immediately.
+
+**Deployment Process:**
+
+- **Not Done by Developers:**  
+  Production-level deployment is **not performed by developers** directly. Instead, this responsibility is handled by the designated team, typically the **DevOps team** or a similar group with the necessary access and expertise to deploy to live servers.
+
+- **Critical or Urgent Fixes:**  
+  In the case of critical bugs or urgent issues affecting the live system, the DevOps team is notified immediately, and the deployment is prioritized. This may happen outside of regular deployment schedules but requires careful coordination with the development team to ensure that the fix is correctly implemented.
+
+---
+
+### General Guidelines for Deployment:
+
+1. **Communication:**  
+   Always inform the team about the scheduled deployment days, especially if there are any changes. Clear communication helps ensure that everyone is on the same page.
+
+2. **Backups:**  
+   Before initiating any deployment, ensure that proper backups of databases and key services are in place. This is crucial for recovery if anything goes wrong during the deployment.
+
+3. **Testing:**  
+   Code should be thoroughly tested in staging or pre-production environments before being merged or deployed to production. Any known issues should be resolved in advance to avoid unnecessary delays.
+
+4. **Post-Deployment Monitoring:**  
+   Once the deployment is completed, ensure that the system is monitored closely for any errors or issues that might arise. Developers should be on standby for any hotfixes or adjustments needed.
+
+---
+
+By following this SOP, we ensure that code deployments are done in a structured, organized, and efficient manner, minimizing risks and maximizing team productivity.
