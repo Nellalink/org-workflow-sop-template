@@ -504,5 +504,20 @@ https://github.com/Nellalink/org-workflow-sop-template/blob/main/.github/workflo
 2. `fix: resolve null pointer exception in OrderService`
     - Body: "Added null checks to avoid crashes when order ID is invalid."
 
+## Code Level Testing
 
-We wish you an amazing working experience.
+Recommended testing frameworks for programming language:
+
+1. **Go** → [`testing`](https://pkg.go.dev/testing) (built-in) or [Testify](https://github.com/stretchr/testify)  
+2. **Node.js** → [Jest](https://jestjs.io/) , [Mocha](https://mochajs.org/) + [Chai](https://www.chaijs.com/), or [AVA](https://github.com/avajs/ava)  
+3. **JavaScript (Frontend)** → [Jest](https://jestjs.io/), [Mocha](https://mochajs.org/), [Jasmine](https://jasmine.github.io/)  
+4. **Kotlin** → [JUnit](https://junit.org/) (for JVM-based Kotlin), [KotlinTest/Kotest](https://kotest.io/)  
+5. **Flutter (Dart)** → [`flutter_test`](https://api.flutter.dev/flutter/flutter_test/flutter_test-library.html) (built-in), [Mockito](https://pub.dev/packages/mockito) for mocking  
+6. **Android (Java)** → [JUnit](https://junit.org/), [Espresso](https://developer.android.com/training/testing/espresso) for UI tests 
+7. **PHPUnit** ([phpunit.de](https://phpunit.de/)).
+8. **Pest PHP** ([pestphp.com](https://pestphp.com/)) → Simpler syntax, inspired by Jest.
+9. **Codeception** ([codeception.com](https://codeception.com/)) → Good for functional and acceptance testing.
+10. **Behat** ([behat.org](https://behat.org/)) → For behavior-driven development (BDD).  
+
+
+#We wish you an amazing working experience.
