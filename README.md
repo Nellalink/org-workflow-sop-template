@@ -70,7 +70,6 @@ In this example, `data` contains multiple records identified by their IDs.
       "userId": "2"
       }
     }
-  }
 ]
 ```
 
