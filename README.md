@@ -1,3 +1,222 @@
+# API DEVELOPMENT GUIDE
+
+## HTTP and Status Codes
+
+When developing API endpoints, it is important to align the HTTP status codes with the response's `status_code` to maintain clarity and consistency. Below are the **valid HTTP status codes** and their corresponding `status_code` values that developers should use:
+
+- **200 OK**: Successful operation, data returned in the `data` object.
+- **201 Created**: The resource was successfully created.
+- **400 Bad Request**: The request was invalid. There might be missing or incorrect parameters.
+- **401 Unauthorized**: The request is missing authentication or the authentication is invalid.
+- **404 Not Found**: The requested resource does not exist.
+- **422 Unprocessable Entity**: The request was well-formed, but the server could not process it due to semantic errors.
+
+## Success and Error Response Format
+
+In the following sections, we show examples of how **successful** and **error** responses should be structured, including the usage of `data` and `error` fields.
+
+---
+
+### Success Response Example
+
+A successful response should contain the following structure:
+
+- `status`: Always `true` for successful responses.
+- `status_code`: HTTP status code (200 or 201).
+- `message`: A descriptive message explaining the success.
+- `data`: The actual data returned by the API. If there is a collection of items, this should be an object containing each item by ID (e.g., for a list of orders).
+
+**Example 1 (Success):**
+
+```json
+{
+  "status": true,
+  "status_code": 200,
+  "message": "Success message",
+  "data": {
+    "1": {
+      "id": "1",
+      "text": "Hello World 1",
+      "userId": "1"
+    },
+    "2": {
+      "id": "2",
+      "text": "Hello World 2",
+      "userId": "2"
+    }
+  }
+}
+```
+
+In this example, `data` contains multiple records identified by their IDs. 
+
+**Example 2 (Success) - data by Array:**
+
+```json
+{
+  "status": true,
+  "status_code": 200,
+  "message": "Success message",
+  "data": [
+    {
+      {
+      "id": "1",
+      "text": "Hello World 1",
+      "userId": "1"
+      },
+      {
+      "id": "2",
+      "text": "Hello World 2",
+      "userId": "2"
+      }
+    }
+  }
+]
+```
+
+In this example, `data` contains multiple records grouped in array. For large collections (such as orders), it is acceptable to return data as a list or an object with identifiers as keys.
+
+---
+
+### Error Response Example
+
+Error responses follow a similar structure, but with key differences:
+
+- `status`: Always `false` for error responses.
+- `status_code`: Corresponds to the appropriate error code (400, 401, 404, 422).
+- `message`: A brief description of the error.
+- `error`: A detailed object that contains:
+  - `error_code`: A unique code identifying the specific error.
+  - `message`: A detailed message explaining the error.
+  - `recommendation`: Suggested action for the client (e.g., contact admin, provide a different input).
+  - `key_name`: Optional, identifies the key related to the failure.
+
+**Example (Error):**
+
+```json
+{
+  "status": false,
+  "status_code": 422,
+  "message": "Error message",
+  "error": {
+    "error_code": 1002,
+    "message": "Testing other key",
+    "recommendation": "Please contact administrator or something use different email address",
+    "key_name": "failure"
+  }
+}
+```
+
+In this error response:
+- `error_code` provides a unique identifier for the error (1002).
+- `message` offers a detailed explanation of the issue.
+- `recommendation` suggests actions the user can take to resolve the problem (e.g., changing an email address).
+- `key_name` identifies the specific field or key that caused the error, which is optional.
+
+---
+
+## How to Structure Your API Responses
+
+### Success Responses
+
+For successful API responses:
+1. Ensure that the `status` field is `true`.
+2. Use `status_code` values of 200 for success or 201 for resource creation.
+3. The `data` field should always contain the actual data being returned. If you have multiple items, return them as an object where each item is identified by a unique key (e.g., `id`).
+
+#### Example (Single Item):
+
+```json
+{
+  "status": true,
+  "status_code": 200,
+  "message": "Operation completed successfully.",
+  "data": {
+    "id": "1",
+    "text": "Hello World 1",
+    "userId": "1"
+  }
+}
+```
+
+#### Example (Multiple Items):
+
+```json
+{
+  "status": true,
+  "status_code": 200,
+  "message": "Successfully fetched data.",
+  "data": {
+    "1": {
+      "id": "1",
+      "text": "Item 1",
+      "userId": "1"
+    },
+    "2": {
+      "id": "2",
+      "text": "Item 2",
+      "userId": "2"
+    }
+  }
+}
+```
+
+### Error Responses
+
+For error responses:
+1. Always set `status` to `false`.
+2. Use the appropriate `status_code` (e.g., 400, 401, 404, 422).
+3. Provide a meaningful `message` explaining the error.
+4. The `error` field should provide an object with an `error_code`, `message`, `recommendation`, and `key_name`.
+
+#### Example (Invalid Input):
+
+```json
+{
+  "status": false,
+  "status_code": 400,
+  "message": "Invalid input provided.",
+  "error": {
+    "error_code": 1001,
+    "message": "The provided email address is already in use.",
+    "recommendation": "Please provide a different email address.",
+    "error_data": "your own data, you can even make it json"
+  }
+}
+```
+
+#### Example (Unauthorized):
+
+```json
+{
+  "status": false,
+  "status_code": 401,
+  "message": "Unauthorized access.",
+  "error": {
+    "error_code": 2001,
+    "message": "Token missing or invalid.",
+    "recommendation": "Please ensure you provide a valid token in the Authorization header.",
+    "error_data": {
+      "key1": "value1"
+    },
+    "key_name": "key_value" //other info as you deem fit
+  }
+}
+```
+
+
+###API TEST CASES
+Developers are advised to implement code level test cases using JEST, PHPunit or according to the programming
+
+For more broader devs or QA can conduct API testing using tools include Amazon API Gateway, Google Apigee, Kong Insomnia, Microsoft Azure API Management, Postman API Platform or Newgen, SmartBear ReadyAPI and SmartBear SwaggerHub.
+
+For scalability test, we recommend JMeter.
+
+Available for use as open source and free API testing tools include Apache JMeter, SoapUI and Rest-Assured. 
+
+---
+By following this guide, you will ensure that all API responses are consistent, easy to understand, and properly formatted, both for success and error cases.
+
 # Standard Operating Procedure (SOP) for Deployment
 
 **Purpose:**  
@@ -60,13 +279,32 @@ Deploy code to live servers, ensuring the system is up and running smoothly for 
    Code should be thoroughly tested in staging or pre-production environments before being merged or deployed to production. Any known issues should be resolved in advance to avoid unnecessary delays.
 
 4. **Post-Deployment Monitoring:**  
-   Once the deployment is completed, ensure that the system is monitored closely for any errors or issues that might arise. Developers should be on standby for any hotfixes or adjustments needed.
+   Once the deployment is completed, ensure that the system is monitored closely for any errors or issues that might arise. Developers should be on standby for any hotfixes or adjustments needed. API Test for scalability can be performed at this time.
 
 ---
 
 By following this SOP, we ensure that code deployments are done in a structured, organized, and efficient manner, minimizing risks and maximizing team productivity.
 
 ---
+
+# Organizational Recommended Workflow - Github Actions
+
+Developers are expected to create a workflow in their repo preferable in `.github/workflows/main.yml`
+and add the following content
+
+```
+The sample content will be here when available
+
+```
+
+By adding the above content, we ensure that the following checks are applied to your repo as available  - `https://github.com/Nellalink/org-workflow-sop-template/tree/main/.github/workflows`
+1. Enforce Repository Rules
+2. Enforce Repository Naming Convention
+3. Security Checks on code  are performed
+
+Developers are advised to automate the following
+4. Workflow for Documentation especially API Docs
+5. Workflow for Deployment to Servers especially test servers
 
 
 # Github Repository, Folder and File Naming  👀
@@ -95,12 +333,13 @@ Each repository name must follow the pattern:
     - `middleware`
     - `frontend`
     - `mobileapp`
-- **PROJECT**: Represents the project name. Must be one of the following:
+- **PROJECT**: Represents the project name. example of valid project includes but not limited to:
+    - `nellalink`
     - `middey`
     - `rimplenet`
     - `nellalinksbs`
     - `nellalinktest`
-- **MODULE**: Identifies the specific functionality or module. Must be one of the following:
+- **MODULE**: Identifies the specific functionality or module. example of valid project includes  but not limited to:
     - `user-app`
     - `admin-app`
     - `kyc-verification`
@@ -114,6 +353,7 @@ Each repository name must follow the pattern:
 - `mobileapp-middey-android`
 - `mobileapp-middey-ios`
 
+The workflow file at `https://github.com/Nellalink/org-workflow-sop-template/blob/main/.github/workflows/enforce-repository-name.yml` holds the current naming convention
 --
 
 ## Enforced Validation
@@ -141,7 +381,7 @@ The naming convention is enforced using a GitHub Action workflow. The workflow v
     - `MODULE` must match one of the valid module names.
 3. If validation fails, the workflow:
     - Outputs the specific error.
-    - Sends a Slack notification with details of the failure.
+    - Sends a notification webhook with details of the failure.
 
 ### Example Slack Notification:
 
@@ -157,7 +397,7 @@ The repository name 'invalid-repo-name' does not follow the valid naming convent
 ### When creating a new repository:
 
 - Ensure the repository name adheres to the naming convention.
-- Use the provided lists for valid suffixes, projects, and modules.
+- Use the approved provided lists for valid suffixes, projects, and modules.
 
 ### If the workflow fails:
 
@@ -171,77 +411,13 @@ The repository name 'invalid-repo-name' does not follow the valid naming convent
 
 The validation is implemented as part of the GitHub Action workflow:
 
-```yaml
-name: Enforce Valid Repository Name
+Details of the workflow enforcing github repo naming is available at
 
-
-on:
-  workflow_call:
-    inputs:
-      slack-token:
-        required: false
-        type: string
-      channel-id:
-        required: false
-        type: string
-
-jobs:
-  validate-name:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Validate Repository Name
-        shell: bash
-        env:
-          REPO_NAME: ${{ github.event.repository.name }}
-         
-        run: |
-          # Define valid suffixes
-          VALID_SUFFIXES=("backend" "middleware" "frontend" "mobileapp" "org")
-          
-          # Define valid project names
-          VALID_PROJECTS=("middey" "nellalinksbs" "nellalinktest" "rimplenet" "workflow")
-          
-          # Define valid modules
-          VALID_MODULES=("user-app" "admin-app" "kyc-verification" "validate-transaction" "sop-templates" "cryptoengine")
-          
-          # Extract parts of the repository name
-          SUFFIX=$(echo "$REPO_NAME" | cut -d- -f1)
-          PROJECT=$(echo "$REPO_NAME" | cut -d- -f2)
-          MODULE=$(echo "$REPO_NAME" | cut -d- -f3-)
-          
-          # Check if SUFFIX is valid
-          if [[ ! " ${VALID_SUFFIXES[@]} " =~ " $SUFFIX " ]]; then
-            echo "Error: Invalid suffix '$SUFFIX'. Must be one of: ${VALID_SUFFIXES[@]}."
-            exit 1
-          fi
-          
-          # Check if PROJECT is valid
-          if [[ ! " ${VALID_PROJECTS[@]} " =~ " $PROJECT " ]]; then
-            echo "Error: Invalid project name '$PROJECT'. Must be one of: ${VALID_PROJECTS[@]}."
-            exit 1
-          fi
-          
-          # Check if MODULE is valid
-          if [[ ! " ${VALID_MODULES[@]} " =~ " $MODULE " ]]; then
-            echo "Error: Invalid module name '$MODULE'. Must be one of: ${VALID_MODULES[@]}."
-            exit 1
-          fi
-          
-          echo "Repository name '$REPO_NAME' is valid."
-
-      - name: Send Slack Notification on Invalid Repository Name
-        if: failure()  
-        uses: distributhor/workflow-webhook@v3
-        with:
-          webhook_url: https://api.jubbytech.com/webhook/
-          webhook_secret: '4544af'
-          data: '{"title": "Invalid Repository Name Detected","text": "The repository name does not follow the valid naming convention.","repo": "${{ github.event.repository.name }}","format": "[SUFFIX]-[PROJECT]-[MODULE]"}'
-
-```
+https://github.com/Nellalink/org-workflow-sop-template/blob/main/.github/workflows/enforce-repository-name.yml
 
 ---
 
-# Proposed Naming conventions/Patterns for:
+# RECOMMENDED : Proposed Naming conventions/Patterns for:
 
 1. **Files/Folders** 
 2. **Branching**
