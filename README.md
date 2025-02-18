@@ -58,7 +58,6 @@ In this example, `data` contains multiple records identified by their IDs.
   "status_code": 200,
   "message": "Success message",
   "data": [
-    {
       {
       "id": "1",
       "text": "Hello World 1",
@@ -69,8 +68,8 @@ In this example, `data` contains multiple records identified by their IDs.
       "text": "Hello World 2",
       "userId": "2"
       }
-    }
-]
+  ]
+}
 ```
 
 In this example, `data` contains multiple records grouped in array. For large collections (such as orders), it is acceptable to return data as a list or an object with identifiers as keys.
