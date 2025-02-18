@@ -72,7 +72,9 @@ In this example, `data` contains multiple records identified by their IDs.
 }
 ```
 
-In this example, `data` contains multiple records grouped in array. For large collections (such as orders), it is acceptable to return data as a list or an object with identifiers as keys.
+In this example, `data` contains multiple records grouped in array. 
+
+Note : For large collections (such as orders), it is acceptable to return data as a list or an object with identifiers as keys.
 
 ---
 
@@ -158,6 +160,21 @@ For successful API responses:
   }
 }
 ```
+#### Example (Delete Item):
+
+```json
+{
+  "status": true,
+  "status_code": 200,
+  "message": "Item deleted successfully.",
+  "data": {
+    "id": "1",
+    "text": "Hello World 1",
+    "userId": "1"
+  }
+}
+```
+Notice the use of `"status": true` and `"status_code": 200` for deletion event
 
 ### Error Responses
 
@@ -203,7 +220,8 @@ For error responses:
 ```
 
 
-###API TEST CASES
+### API TEST CASES
+
 Developers are advised to implement code level test cases using JEST, PHPunit or according to the programming
 
 For more broader devs or QA can conduct API testing using tools include Amazon API Gateway, Google Apigee, Kong Insomnia, Microsoft Azure API Management, Postman API Platform or Newgen, SmartBear ReadyAPI and SmartBear SwaggerHub.
@@ -489,3 +507,6 @@ https://github.com/Nellalink/org-workflow-sop-template/blob/main/.github/workflo
     - Body: "Implemented login, registration, and logout functionality using OAuth."
 2. `fix: resolve null pointer exception in OrderService`
     - Body: "Added null checks to avoid crashes when order ID is invalid."
+
+
+We wish you an amazing working experience.
