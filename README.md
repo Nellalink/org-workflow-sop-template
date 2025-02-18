@@ -165,16 +165,12 @@ For successful API responses:
 ```json
 {
   "status": true,
-  "status_code": 200,
+  "status_code": 204,
   "message": "Item deleted successfully.",
-  "data": {
-    "id": "1",
-    "text": "Hello World 1",
-    "userId": "1"
-  }
+  "data": null
 }
 ```
-Notice the use of `"status": true` and `"status_code": 200` for deletion event
+Notice the use of `"status": true` and `"status_code": 204` for deletion event
 
 ### Error Responses
 
