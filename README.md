@@ -239,8 +239,28 @@ This document outlines the process and timeline for code-level and production-le
 ### 1. **Code-Level Deployment (Branch Merging to Main)**
 
 **Objective:**  
-1. **Developers** can continually merge their individual branch to **develop** branch 
-2. Merging of code from **develop** branch to the **main** branch is termed **DEPLOYMENT** to keep the main branch up to date and ready for production deployment.
+1. **Developers** can continually merge their individual branch to **`develop`** branch by creating a pull request, this pull request is accepted if all checks passed, developers should avoid merging or creating a pull request directly to **`main`**
+2. Merging of code from **`develop`** branch to the **`main`** branch is termed **DEPLOYMENT** to keep the main branch up to date and ready for production deployment, this will be done by creating a pull request by team lead from **`develop`** to **`main`** and subsequently acceptance if all checks passed.
+N/B : any branches that are behind the main branch is not eligible for pull request and should take steps to fix the behind count to 0
+
+**SOFT FIX FOR BRANCH THAT ARE BEHIND THE MAIN BRANCH**
+  `
+  git checkout YOUR_BRANCH_NAME_HERE
+  git pull origin main
+  `
+
+For e.g is your branch is named `sample`
+To update your local `sample` branch with the latest changes from main, you can do the following:
+
+**1 .Switch to `sample` branch in terminal by running command below:**
+
+`git checkout sample`
+
+**2. Pull (merge) changes from main into develop:**
+ `git pull origin main`
+This above command fetches the latest changes from the remote `main` branch and merges them into your current branch `sample`.
+
+Push your commit to your branch, it should fix the behind count to 0
 
 **Deployment Days:**
 
