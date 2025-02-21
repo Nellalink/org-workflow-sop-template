@@ -454,7 +454,7 @@ https://github.com/Nellalink/org-workflow-sop-template/blob/main/.github/workflo
 
 ---
 
-# RECOMMENDED : Proposed Naming conventions/Patterns for:
+# RECOMMENDED : Proposed naming conventions/patterns for:
 
 1. **Files/Folders** 
 2. **Branching**
