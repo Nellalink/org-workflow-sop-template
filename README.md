@@ -255,10 +255,14 @@ To update your local `sample` branch with the latest changes from main, you can 
 
 **1 .Switch to `sample` branch in terminal by running command below:**
 
-`git checkout sample`
+```
+git checkout sample
+```
 
 **2. Pull (merge) changes from main into develop:**
- `git pull origin main`
+ ```
+git pull origin main
+```
 This above command fetches the latest changes from the remote `main` branch and merges them into your current branch `sample`.
 
 Push your commit to your branch, it should fix the behind count to 0
