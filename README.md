@@ -245,10 +245,10 @@ This document outlines the process and timeline for code-level and production-le
 **N/B:** Any branches that is behind the `main` branch is not eligible for pull request and should take steps to fix the behind count to 0.
 
 **SOFT FIX FOR BRANCH THAT ARE BEHIND THE MAIN BRANCH**
-  `
+  ```
   git checkout YOUR_BRANCH_NAME_HERE
   git pull origin main
-  `
+  ```
 
 For e.g if your branch is named `sample`
 To update your local `sample` branch with the latest changes from main, you can do the following:
