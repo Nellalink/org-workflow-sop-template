@@ -239,9 +239,10 @@ This document outlines the process and timeline for code-level and production-le
 ### 1. **Code-Level Deployment (Branch Merging to Main)**
 
 **Objective:**  
-1. **Developers** can continually merge their individual branch to **`develop`** branch by creating a pull request, this pull request is accepted if all checks passed, developers should avoid merging or creating a pull request directly to **`main`**
-2. Merging of code from **`develop`** branch to the **`main`** branch is termed **DEPLOYMENT** to keep the main branch up to date and ready for production deployment, this will be done by creating a pull request by team lead from **`develop`** to **`main`** and subsequently acceptance if all checks passed.
-N/B : any branches that are behind the main branch is not eligible for pull request and should take steps to fix the behind count to 0
+1. **Developers** can continually commit to their branch at anytime.
+2. Developers at milestones should merge their individual branch to **`develop`** branch by creating a pull request, this pull request is accepted if all checks passed, developers should avoid merging or creating a pull request directly to **`main`** .
+3. Merging of code from **`develop`** branch to the **`main`** branch is termed **DEPLOYMENT** to keep the main branch up to date and ready for production deployment, this should be done by team lead by creating a pull request  from **`develop`** to **`main`** and subsequently acceptance if all checks passed.
+**N/B:** Any branches that is behind the `main` branch is not eligible for pull request and should take steps to fix the behind count to 0.
 
 **SOFT FIX FOR BRANCH THAT ARE BEHIND THE MAIN BRANCH**
   `
@@ -249,7 +250,7 @@ N/B : any branches that are behind the main branch is not eligible for pull requ
   git pull origin main
   `
 
-For e.g is your branch is named `sample`
+For e.g if your branch is named `sample`
 To update your local `sample` branch with the latest changes from main, you can do the following:
 
 **1 .Switch to `sample` branch in terminal by running command below:**
