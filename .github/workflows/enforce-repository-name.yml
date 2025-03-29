@@ -24,7 +24,7 @@ jobs:
           VALID_SUFFIXES=("backend" "middleware" "frontend" "mobileapp" "org")
           
           # Define valid project names
-          VALID_PROJECTS=("middey" "nellalinksbs" "nellalinktest" "rimplenet" "workflow")
+          VALID_PROJECTS=("middey" "nellalink-sbs" "nellalinktest" "rimplenet" "workflow")
           
           # Define valid modules
           VALID_MODULES=("user-app" "admin-app" "kyc-verification" "validate-transaction" "sop-template" "cryptoengine")
